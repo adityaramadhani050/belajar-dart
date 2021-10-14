@@ -6,7 +6,7 @@ class Item {
 }
 
 // BAD
-class OrderNoSRP {
+class OrderBad {
   void calculateTotal() {
     // do calculate total
   }
@@ -45,7 +45,7 @@ class OrderNoSRP {
 }
 
 // GOOD
-class OrderWithSRP {
+class Order {
   final List<Item> _items = [];
 
   void calculateTotal() {
@@ -73,11 +73,11 @@ class OrderWithSRP {
 }
 
 class OrderViewer {
-  void printOrder(OrderWithSRP order) {
+  void printOrder(Order order) {
     // do print order
   }
 
-  void showOrder(OrderWithSRP order) {
+  void showOrder(Order order) {
     for (var i in order._items) {
       print('Nama Barang: ${i.name} - Harga: ${i.price}');
     }

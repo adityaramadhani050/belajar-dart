@@ -1,7 +1,7 @@
 import 'package:solid_principle/single_responbility_principle.dart';
 
 void main(List<String> arguments) {
-  OrderWithSRP order = OrderWithSRP();
+  Order order = Order();
   OrderViewer viewer = OrderViewer();
 
   order.addItem(const Item(1, 'baju', 50));
