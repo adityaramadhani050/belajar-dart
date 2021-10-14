@@ -1,50 +1,6 @@
-class Item {
-  final int id;
-  final String name;
-  final int price;
-  const Item(this.id, this.name, this.price);
-}
+import 'package:solid_principle/item.dart';
 
-// BAD
-class OrderBad {
-  void calculateTotal() {
-    // do calculate total
-  }
-
-  void getItems() {
-    // do return items
-  }
-
-  void getItemCount() {
-    // do return item count
-  }
-
-  void addItem(Item item) {
-    // do add item
-  }
-
-  void deleteItem(Item item) {
-    // do delete item
-  }
-
-  void printOrder() {
-    // do print order
-  }
-
-  void showOrder() {
-    // do show order
-  }
-
-  void getDailyHistory() {
-    // return order history in daily
-  }
-
-  void getMonthlyHistory() {
-    // return order history in monthly
-  }
-}
-
-// GOOD
+// GOOD SINGLE RESPONBILITY PRINCIPLE
 class Order {
   final List<Item> _items = [];
 

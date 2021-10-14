@@ -1,4 +1,5 @@
-import 'package:solid_principle/single_responbility_principle.dart';
+import 'package:solid_principle/good_srp.dart';
+import 'package:solid_principle/item.dart';
 
 void main(List<String> arguments) {
   Order order = Order();
