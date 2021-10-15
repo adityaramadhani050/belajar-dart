@@ -321,9 +321,6 @@ class MotorCycle extends Vehicle {
 
   @override
   void stop() {}
-
-  @override
-  void openDoors() {}
 }
 
 class Car extends Vehicle implements DoorInterface  {
