@@ -2,8 +2,8 @@
 
 ### Single Responbility Principle (SRP)
 
-Sebuah modul harus bertanggung jawab kepada satu, dan hanya satu aktor. prinsip ini digunakan untuk mengatur sebuah class memiliki satu tanggung jawab, apabila terdapat dua tanggung jawab atau fungsionalitas yang tidak terkait maka tanggung jawab atau fungsionalitas dari class tersebut harus dibagi menjadi class yang berbeda. sehingga ketika melakukan perubahan pada fungsionalitas pada suatu class kita hanya fokus pada masing-masing class.  
-Contoh: seseorang (class) memiliki tugas atau tanggung jawab sebagai juru masak, penjaga gedung, melayani pelanggan dan mengemudi. maka dengan menerapkan prinsip SRP kita dapat membagi tugas tersebut ke orang lain (class) sesuai dengan tugas dan tanggung jawabnya menjadi (class) koki, (class) satpam, (class) customer service dan (class) sopir.
+Sebuah modul harus bertanggung jawab kepada satu, dan hanya satu aktor. Prinsip ini digunakan untuk mengatur sebuah class memiliki satu tanggung jawab, apabila terdapat dua tanggung jawab atau fungsionalitas yang tidak terkait maka tanggung jawab atau fungsionalitas dari class tersebut harus dibagi menjadi class yang berbeda. Sehingga ketika melakukan perubahan pada fungsionalitas pada suatu class kita hanya fokus pada masing-masing class.  
+Contoh: seseorang (class) memiliki tugas atau tanggung jawab sebagai juru masak, penjaga gedung, melayani pelanggan dan mengemudi. Maka dengan menerapkan prinsip SRP kita dapat membagi tugas tersebut ke orang lain (class) sesuai dengan tugas dan tanggung jawabnya menjadi (class) koki, (class) satpam, (class) customer service dan (class) sopir.
 
 BAD:
 
@@ -27,7 +27,7 @@ class Person {
 }
 ```
 
-Berdasarkan kode diatas, class person memiliki banyak tanggung jawab (responbility). dengan menerapkan prinsip RSP kita dapat memisahkan masing-masing function atau tanggung jawab ke dalam class baru. sehingga hasilnya akan menjadi seperti ini:
+Berdasarkan kode diatas, class person memiliki banyak tanggung jawab (responbility). Dengan menerapkan prinsip RSP kita dapat memisahkan masing-masing function atau tanggung jawab ke dalam class baru. Sehingga hasilnya akan menjadi seperti ini:
 
 GOOD:
 
@@ -76,7 +76,7 @@ class MyRobot {
 }
 ```
 
-lalu kita ingin menambahkan kemampuan dari robot tersebut yaitu robot dapat terbang dan membunuh musuh. pendekatan yang salah adalah kita menambahkan kemampuan tersebut secara langsung dengan mengubah isi class MyRobot.
+Lalu kita ingin menambahkan kemampuan dari robot tersebut yaitu robot dapat terbang dan membunuh musuh. Pendekatan yang salah adalah kita menambahkan kemampuan tersebut secara langsung dengan mengubah isi class MyRobot.
 
 BAD:
 
@@ -96,7 +96,7 @@ class MyRobot {
 }
 ```
 
-Dengan menghilangkan fungsi walk() pada class MyRobot, maka dapat membuat sistem mengalami error apabila terdapat sistem yang menggunakan class MyRobot memanggil fungsi walk(). untuk menghindari kesalahan tersebut maka lebih baik menambahkan fitur atau kemampuannya.
+Dengan menghilangkan fungsi walk() pada class MyRobot, maka dapat membuat sistem mengalami error apabila terdapat sistem yang menggunakan class MyRobot memanggil fungsi walk(). Untuk menghindari kesalahan tersebut maka lebih baik menambahkan fitur atau kemampuannya.
 
 GOOD:
 
@@ -126,7 +126,7 @@ Dengan demikian apabila terdapat sistem yang menggunakan class MyRobot lalu diub
 
 ### Liskov Subtitution Principle (LSP)
 
-LSP adalah tentang pendelegasian sebuah tanggung jawab. subclass atau anak turunan harus bisa melakukan apa yang superclass atau induknya lakukan. misal superclass dapat menghitung jumlah total, maka subclass atau anak turunannya harus bisa melakukan hal yang sama. fungsi yang terdapat pada superclass harus relevan untuk subclass atau dapat membuat fungsi yang general pada superclass.
+LSP adalah tentang pendelegasian sebuah tanggung jawab. Subclass atau anak turunan harus bisa melakukan apa yang superclass atau induknya lakukan. Misal superclass dapat menghitung jumlah total, maka subclass atau anak turunannya harus bisa melakukan hal yang sama. Fungsi yang terdapat pada superclass harus relevan untuk subclass atau kita dapat membuat fungsi yang general pada superclass supaya relevan dengan subclass nantinya.
 
 BAD:
 
@@ -159,7 +159,7 @@ class Vegetable extends Product {
 }
 ```
 
-Pada contoh kode diatas memiliki class abstract bernama Product yang di dalamnya terdapat beberapa anggota abstract. class tersebut diwariskan kepada class Vegetable. untuk saat ini class tersebut tidak ada masalah dan berjalan dengan baik. lalu kita ingin menambahkan sebuah class produk baru yaitu produk smartphone dan class tersebut mewarisi class product.
+Pada contoh kode diatas memiliki class abstract bernama Product yang di dalamnya terdapat beberapa anggota abstract. Class tersebut diwariskan kepada class Vegetable. Untuk saat ini class tersebut tidak ada masalah dan berjalan dengan baik. Lalu kita ingin menambahkan sebuah class produk baru yaitu produk smartphone dan class tersebut mewarisi class product.
 
 ```dart
 abstract class Product {
@@ -207,8 +207,8 @@ class Smartphone extends Product {
 }
 ```
 
-dikarenakan pada class product terdapat member yang abstrak maka ketika menambahkan class baru smartphone yang mewarisi dari class product, class smartphone harus mengimplementasikan fungsi dari superclassnya. seperti yang diketahui sebuah smartphone atau benda elektronik tidak memiliki masa kadaluwarsa. sehingga dalam kasus ini class product menjadi tidak relevan untuk diwariskan ke class smartphone dan tentunya ini melanggar aturan subclass.  
-untuk mengatasi kasus tersebut perlu dilakukan subtitusi fungsi yang tidak relevan ke dalam kelas abstraksi sendiri dan diwariskan ke class yang relevan dengannya.
+Dikarenakan pada class product terdapat member yang abstrak maka ketika menambahkan class baru smartphone yang mewarisi dari class product, class smartphone harus mengimplementasikan fungsi dari superclassnya. Seperti yang diketahui sebuah smartphone atau benda elektronik tidak memiliki masa kadaluwarsa. Sehingga dalam kasus ini class product menjadi tidak relevan untuk diwariskan ke class smartphone dan tentunya ini melanggar aturan subclass.  
+Untuk mengatasi kasus tersebut perlu dilakukan subtitusi fungsi yang tidak relevan ke dalam kelas abstraksi sendiri dan diwariskan ke class yang relevan dengannya.
 
 GOOD:
 
@@ -265,4 +265,80 @@ class Smartphone extends ElectronicProduct {
 }
 ```
 
-dengan menerapkan prinsip liskov seperti pada kode diatas dapat meningkatkan desain dari sistem yang dikembangkan dan ketergantungan antar klien dapat disubstitusikan tanpa klien tahu perubahan yang ada.
+Dengan menerapkan prinsip liskov seperti pada kode diatas dapat meningkatkan desain dari sistem yang dikembangkan dan ketergantungan antar klien dapat disubstitusikan tanpa klien tahu perubahan yang ada.
+
+### Interface Segregation Principle (ISP)
+
+Sebuah subclass tidak boleh dipaksa untuk bergantung pada interface yang tidak mereka gunakan. Kita pasti pernah membuat class yang mengimplementasikan sebuah public interface dan iterface tersebut diimplementasikan oleh class lainnya. Class-class yang kita buat terkadang hanya membutuhkan beberapa fungsi yang ada pada interface tersebut sehingga menurut aturan prinsip interface segregation hal ini kurang baik. Ketika prinsip interface segregation diterapkan, setiap class-class akan mengimplementasi beberapa interface class yang lebih kecil sesuai dengan fungsi-fungsi yang dibutuhkan class-class tersebut. ISP adalah tentang pemisahan tanggung jawab. Robot yang nggak punya alat untuk menyelesaikan tugas, jangan diberi tugas yang tidak semestinya. Misalnya robot yang tidak punya sayap, seharusnya tidak diberikan tugas untuk terbang. Namun sesuaikan tugas dengan kebutuhan masing-masing.
+
+BAD:
+
+```dart
+abstract class VehicleInterface {
+  void drive();
+  void stop();
+  void refuel();
+  void openDoors();
+}
+
+class MotorCycle implements VehicleInterface {
+  @override
+  void drive() {}
+
+  @override
+  void refuel() {}
+
+  @override
+  void stop() {}
+
+  // Can not be implemented
+  @override
+  void openDoors() {}
+}
+```
+
+Di dalam interface Vehicle, terdapat beberapa interface, di antaranya drive(), stop(), refuel(), dan openDoors(). Ketika class Motorcycle mengimplementasikan interface tersebut, maka seluruh function dari interface Vehicle akan ter-override di dalam classs Motorcycle. Namun, ada hal yang kurang tepat, yaitu terdapat function openDoors(), sementara kenyataannya motorcycle tersebut seharusnya tidak memiliki pintu (doors).
+
+GOOD:
+
+```dart
+abstract class Vehicle {
+  void drive();
+  void stop();
+  void refuel();
+}
+
+abstract class DoorInterface {
+  void openDoors();
+}
+
+class MotorCycle extends Vehicle {
+  @override
+  void drive() {}
+
+  @override
+  void refuel() {}
+
+  @override
+  void stop() {}
+
+  @override
+  void openDoors() {}
+}
+
+class Car extends Vehicle implements DoorInterface  {
+  @override
+  void drive() {}
+
+  @override
+  void refuel() {}
+
+  @override
+  void stop() {}
+
+  @override
+  void openDoors() {}
+}
+```
+
+Dengan memisahkan interface menjadi bagian-bagian kecil, kegunaan dan tanggung jawab dari interface tersebut akan mudah dipahami oleh developer. Tujuannya adalah untuk menghasilkan desain yang fleksibel, dengan cukup dengan mengimplementasikan interface tertentu daripada mengimplementasikan satu interface yang di dalamnya terdiri dari banyak function yang lebih kompleks.
