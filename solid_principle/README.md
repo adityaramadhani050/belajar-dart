@@ -123,3 +123,146 @@ class MySuperRobot extends MyRobot {
 ```
 
 Dengan demikian apabila terdapat sistem yang menggunakan class MyRobot lalu diubah menjadi MySuperRobot agar dapat terbang, maka sistem tersebut tidak akan mengalami error dan tetap bisa menggunakan fungsi walk.
+
+### Liskov Subtitution Principle (LSP)
+
+LSP adalah tentang pendelegasian sebuah tanggung jawab. subclass atau anak turunan harus bisa melakukan apa yang superclass atau induknya lakukan. misal superclass dapat menghitung jumlah total, maka subclass atau anak turunannya harus bisa melakukan hal yang sama. fungsi yang terdapat pada superclass harus relevan untuk subclass atau dapat membuat fungsi yang general pada superclass.
+
+BAD:
+
+```dart
+abstract class Product {
+  String getName();
+  int getPrice();
+  DateTime getExpiredDate();
+
+  void showProductInfo() {
+    print('Product Info');
+  }
+}
+
+class Vegetable extends Product {
+  @override
+  DateTime getExpiredDate() {
+    return DateTime.now();
+  }
+
+  @override
+  String getName() {
+    return 'Broccoli';
+  }
+
+  @override
+  int getPrice() {
+    return 10000;
+  }
+}
+```
+
+Pada contoh kode diatas memiliki class abstract bernama Product yang di dalamnya terdapat beberapa anggota abstract. class tersebut diwariskan kepada class Vegetable. untuk saat ini class tersebut tidak ada masalah dan berjalan dengan baik. lalu kita ingin menambahkan sebuah class produk baru yaitu produk smartphone dan class tersebut mewarisi class product.
+
+```dart
+abstract class Product {
+  String getName();
+  int getPrice();
+  DateTime getExpiredDate();
+
+  void showProductInfo() {
+    print('Product Info');
+  }
+}
+
+class Vegetable extends Product {
+  @override
+  DateTime getExpiredDate() {
+    return DateTime.now();
+  }
+
+  @override
+  String getName() {
+    return 'Broccoli';
+  }
+
+  @override
+  int getPrice() {
+    return 10000;
+  }
+}
+
+class Smartphone extends Product {
+  @override
+  DateTime getExpiredDate() {
+    return DateTime.now(); // smartphone ada kadaluarsa?
+  }
+
+  @override
+  String getName() {
+    return 'samsung';
+  }
+
+  @override
+  int getPrice() {
+    return 500000;
+  }
+}
+```
+
+dikarenakan pada class product terdapat member yang abstrak maka ketika menambahkan class baru smartphone yang mewarisi dari class product, class smartphone harus mengimplementasikan fungsi dari superclassnya. seperti yang diketahui sebuah smartphone atau benda elektronik tidak memiliki masa kadaluwarsa. sehingga dalam kasus ini class product menjadi tidak relevan untuk diwariskan ke class smartphone dan tentunya ini melanggar aturan subclass.  
+untuk mengatasi kasus tersebut perlu dilakukan subtitusi fungsi yang tidak relevan ke dalam kelas abstraksi sendiri dan diwariskan ke class yang relevan dengannya.
+
+GOOD:
+
+```dart
+abstract class Product {
+  String getName();
+  int getPrice();
+
+  void showProductInfo() {
+    print('Product Info');
+  }
+}
+
+abstract class FoodProduct extends Product {
+  DateTime getExpiredDate();
+}
+
+abstract class ElectronicProduct extends Product {
+  int getWarrantyYear();
+}
+
+class Vegetable extends FoodProduct {
+  @override
+  String getName() {
+    return 'Broccoli';
+  }
+
+  @override
+  int getPrice() {
+    return 10000;
+  }
+
+  @override
+  DateTime getExpiredDate() {
+    return DateTime.now();
+  }
+}
+
+class Smartphone extends ElectronicProduct {
+  @override
+  String getName() {
+    return 'samsung';
+  }
+
+  @override
+  int getPrice() {
+    return 500000;
+  }
+
+  @override
+  int getWarrantyYear() {
+    return 1;
+  }
+}
+```
+
+dengan menerapkan prinsip liskov seperti pada kode diatas dapat meningkatkan desain dari sistem yang dikembangkan dan ketergantungan antar klien dapat disubstitusikan tanpa klien tahu perubahan yang ada.
