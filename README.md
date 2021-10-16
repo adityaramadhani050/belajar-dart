@@ -7,4 +7,4 @@ Dart:
    https://www.youtube.com/c/ProgrammerZamanNow   
    
 SOLID Principle:   
-   dicoding.com
+   https://www.dicoding.com/
