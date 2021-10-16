@@ -339,3 +339,127 @@ class Car extends Vehicle implements DoorInterface  {
 ```
 
 Dengan memisahkan interface menjadi bagian-bagian kecil, kegunaan dan tanggung jawab dari interface tersebut akan mudah dipahami oleh developer. Tujuannya adalah untuk menghasilkan desain yang fleksibel, dengan cukup dengan mengimplementasikan interface tertentu daripada mengimplementasikan satu interface yang di dalamnya terdiri dari banyak function yang lebih kompleks.
+
+### Dependency Inversion Principle (DIP)
+
+Dependency Inversion memiliki dua aturan yaitu yang pertama high-level module tidak boleh bergantung pada low-level, keduanya harus bergantung pada abstraction. Yang kedua adalah abstraction tidak boleh bergantung pada detail, detail harus bergantung pada abstraction. High-level module adalah kelas-kelas yang berurusan dengan kumpulan fungsionalitas yang mengimplementasikan aturan bisnis sesuai dengan desain yang telah ditentukan. Sedangkan low-leve module bertanggung jawab pada operasi yang lebih detail misalnya menulis informasi ke database atau menyampaikan pesan ke sistem operasi.  
+contoh robot tidak boleh tergantung pada satu alat saja, akan tetapi dapat berubah-ubah sesuai dengan kebutuhan. Misalnya robot tidak boleh hanya tergantung pada spatula saja untuk memasak, tapi bisa juga menggunakan pisau, penjepit atau centong. Dapat dilihat sebelumnya spatula tertanam pada tangan robot, sehingga ia tidak bisa menggunakan alat lain. agar robot dapat menggunakan alat apa saja maka diperlukan sekrup yang bisa digunakan untuk bongkar pasang alat. Sekrup ini pada dunia programming bisa menggunakan interface atau abstract class.
+
+BAD:
+
+```dart
+class Car {
+  final Engine _engine;
+  Car(this._engine);
+
+  void start() {
+    _engine.start();
+  }
+}
+
+class Engine {
+  void start() {
+
+  }
+}
+```
+
+pada contoh kode diatas kita memiliki sebuah class Car yang memiliki constructor untuk menambahkan engine, dalam hal ini dimodelkan sebagai class Engine. lalu bagaimana jika kita ingi mengganti engine dengan engine yang lain.
+
+```dart
+class Car {
+  final Engine _engine;
+  Car(this._engine);
+
+  void start() {
+    _engine.start();
+  }
+}
+
+class Engine {
+  void start() {
+
+  }
+}
+
+class DieselEngine {
+  void start() {
+
+  }
+}
+
+void main() {
+  Car car = Car(Engine());
+  car.start();
+  // kode diatas akan berjalan dengan baik
+  // karena class atau objekyang dimasukkan sebagai parameter sesuai
+
+  Car carDiesel = Car(DieselEngine());
+  carDiesel.start()
+  // kode diatas akan mengalami error
+  // karena class atau objeck yang dimasukkan sebagai parameter tidak sesuai
+}
+```
+
+Untuk mengatasi permasalah tersebut kita dapat menerapkan prinsip dependency inversion. yang pertama kita membuat class abstraction sebgai interface untuk diimplementasika ke high-level dan low-level terlebih dahulu.
+
+GOOD:
+
+```dart
+abstract class EngineInterface {
+  void start();
+}
+```
+
+selanjutnya kita gunakan abstrak class yang telah dibuat ke dalam class high-level.
+
+```dart
+class Car {
+  final EngineInterface _engine;
+
+  Car(this._engine);
+
+  void startEngine() {
+    _engine.start();
+  }
+}
+```
+
+Sehingga kita dapat membuat class engine baru dengan masing-masing tipe mesin. selanjutnya kita implementasikan abstrak class ke dalam low-level.
+
+```dart
+class DieselEngine implements EngineInterface {
+  @override
+  void start() {
+    print('menyalakan mobil dengan mesin diesel');
+  }
+}
+
+class PetrolEngine implements EngineInterface {
+  @override
+  void start() {
+    print('menyalakan mobil dengan mesin petrol');
+  }
+}
+
+class HybridEngine implements EngineInterface {
+  @override
+  void start() {
+    print('menyalakan mobil dengan mesin hybrid');
+  }
+}
+```
+
+Sehingga, kita dengan mudah dapat membuat jenis Car yang berbeda, cukup dari satu model class Car saja.
+
+```dart
+void main(List<String> arguments) {
+  Car dieselCar = Car(DieselEngine());
+  Car petrolCar = Car(PetrolEngine());
+  Car hybridCar = Car(HybridEngine());
+
+  dieselCar.startEngine();
+  petrolCar.startEngine();
+  hybridCar.startEngine();
+}
+```

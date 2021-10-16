@@ -1,6 +1,11 @@
-import 'package:solid_principle/good_ocp.dart';
+import 'package:solid_principle/good_dip.dart';
 
 void main(List<String> arguments) {
-  Cinema cinema = CoupleCinema(100);
-  print(cinema.calculateAdminFee);
+  Car dieselCar = Car(DieselEngine());
+  Car petrolCar = Car(PetrolEngine());
+  Car hybridCar = Car(HybridEngine());
+
+  dieselCar.startEngine();
+  petrolCar.startEngine();
+  hybridCar.startEngine();
 }
