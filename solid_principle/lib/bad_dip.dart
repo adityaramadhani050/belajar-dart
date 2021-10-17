@@ -8,15 +8,11 @@ class Car {
 }
 
 class Engine {
-  void start() {
-
-  }
+  void start() {}
 }
 
 class DieselEngine {
-  void start() {
-
-  }
+  void start() {}
 }
 
 void main() {
@@ -25,8 +21,8 @@ void main() {
   // kode diatas akan berjalan dengan baik
   // karena class atau objekyang dimasukkan sebagai parameter sesuai
 
-  Car carDiesel = Car(DieselEngine());
-  carDiesel.start()
+  // Car carDiesel = Car(DieselEngine());
+  // carDiesel.start()
   // kode diatas akan mengalami error
   // karena class atau objeck yang dimasukkan sebagai parameter tidak sesuai
 }
