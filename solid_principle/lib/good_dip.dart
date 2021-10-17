@@ -1,11 +1,11 @@
 // ABSTRACTION
-abstract class EngineInterface {
+abstract class Engine {
   void start();
 }
 
 // HIGH LEVEL
 class Car {
-  final EngineInterface _engine;
+  final Engine _engine;
 
   Car(this._engine);
 
@@ -15,21 +15,21 @@ class Car {
 }
 
 // LOW LEVEL
-class DieselEngine implements EngineInterface {
+class DieselEngine implements Engine {
   @override
   void start() {
     print('menyalakan mobil dengan mesin diesel');
   }
 }
 
-class PetrolEngine implements EngineInterface {
+class PetrolEngine implements Engine {
   @override
   void start() {
     print('menyalakan mobil dengan mesin petrol');
   }
 }
 
-class HybridEngine implements EngineInterface {
+class HybridEngine implements Engine {
   @override
   void start() {
     print('menyalakan mobil dengan mesin hybrid');
